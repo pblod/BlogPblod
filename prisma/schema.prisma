@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Blogpost{
+  id String @id @default(uuid())
+  title String
+  content String
+  imageURL String
+  authorId String
+  authorName String
+  authorImage String
+  status String @default("pending") // Can be "pending", "approved", or "rejected"
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
